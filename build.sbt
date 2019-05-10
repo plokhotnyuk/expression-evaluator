@@ -70,4 +70,3 @@ lazy val `expression-evaluator` = project.in(file("."))
       "org.scalatest" %% "scalatest" % (if (scalaVersion.value == "2.13.0-M5") "3.0.7" else "3.0.8-RC2") % Test
     )
   )
-

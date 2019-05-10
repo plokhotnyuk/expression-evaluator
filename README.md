@@ -11,7 +11,7 @@ Add the library with a "provided" scope to your dependencies list:
 
 ```sbt
 libraryDependencies ++= Seq(
-  "com.github.plokhotnyuk.expression_evaluator" %% "expression_evaluator" % "0.0.1-SNAPSHOT" % Provided // required only in compile-time
+  "com.github.plokhotnyuk.expression-evaluator" %% "expression-evaluator" % "0.0.1-SNAPSHOT" % Provided // required only in compile-time
 )
 ```
 
