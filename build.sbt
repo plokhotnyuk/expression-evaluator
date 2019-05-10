@@ -1,7 +1,7 @@
 import sbt._
 
 lazy val commonSettings = Seq(
-  organization := "com.github.plokhotnyuk.expression_evaluator",
+  organization := "com.github.plokhotnyuk.expression-evaluator",
   organizationHomepage := Some(url("https://github.com/plokhotnyuk")),
   homepage := Some(url("https://github.com/plokhotnyuk/expression-evaluator")),
   licenses := Seq(("Apache License 2.0", url("https://www.apache.org/licenses/LICENSE-2.0"))),
