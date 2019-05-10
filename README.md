@@ -1,5 +1,5 @@
-# constexpr4s
-Constant expression evaluation in compile-time for Scala
+# Expression Evaluator
+Compile-time expression evaluation for Scala
 
 Publish it locally:
 
@@ -11,18 +11,18 @@ Add the library with a "provided" scope to your dependencies list:
 
 ```sbt
 libraryDependencies ++= Seq(
-  "com.github.plokhotnyuk.constexpr4s" %% "constexpr4s" % "0.0.1-SNAPSHOT" % Provided // required only in compile-time
+  "com.github.plokhotnyuk.expression_evaluator" %% "expression_evaluator" % "0.0.1-SNAPSHOT" % Provided // required only in compile-time
 )
 ```
 
 Generate expression results for primitives and array of primitives:
     
 ```scala
-import com.github.plokhotnyuk.constexpr4s._
+import com.github.plokhotnyuk.expression_evaluator._
 
 object Constants {
-  val x = constexpr(10 * 10 * 10)
-  val xs = constexpr((1 to 3).toArray)
+  val x = eval(10 * 10 * 10)
+  val xs = eval((1 to 3).toArray)
 }
 ```
 

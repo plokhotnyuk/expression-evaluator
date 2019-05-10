@@ -1,9 +1,9 @@
 import sbt._
 
 lazy val commonSettings = Seq(
-  organization := "com.github.plokhotnyuk.constexpr4s",
+  organization := "com.github.plokhotnyuk.expression_evaluator",
   organizationHomepage := Some(url("https://github.com/plokhotnyuk")),
-  homepage := Some(url("https://github.com/plokhotnyuk/constexpr4s")),
+  homepage := Some(url("https://github.com/plokhotnyuk/expression-evaluator")),
   licenses := Seq(("Apache License 2.0", url("https://www.apache.org/licenses/LICENSE-2.0"))),
   startYear := Some(2019),
   developers := List(
@@ -44,8 +44,8 @@ lazy val publishSettings = Seq(
   sonatypeProfileName := "com.github.plokhotnyuk",
   scmInfo := Some(
     ScmInfo(
-      url("https://github.com/plokhotnyuk/constexpr4s"),
-      "scm:git@github.com:plokhotnyuk/constexpr4s.git"
+      url("https://github.com/plokhotnyuk/expression-evaluator"),
+      "scm:git@github.com:plokhotnyuk/expression-evaluator.git"
     )
   ),
   publishConfiguration := {
@@ -57,7 +57,7 @@ lazy val publishSettings = Seq(
   pomIncludeRepository := { _ => false }
 )
 
-lazy val constexpr4s = project.in(file("."))
+lazy val `expression-evaluator` = project.in(file("."))
   .settings(commonSettings)
   .settings(publishSettings)
   .settings(publishSettings)

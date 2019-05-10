@@ -1,9 +1,9 @@
-package com.github.plokhotnyuk.constexpr4s
+package com.github.plokhotnyuk.expression_evaluator
 
 import scala.language.experimental.macros
 import scala.reflect.macros.blackbox
 
-object constexpr {
+object eval {
   def apply[A](expr: A): A = macro Impl.apply[A]
 
   private object Impl {
