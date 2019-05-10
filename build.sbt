@@ -25,7 +25,7 @@ lazy val commonSettings = Seq(
     "-unchecked",
     "-Ywarn-dead-code",
     "-Xlint",
-    "-Xmacro-settings:print-constants"
+    "-Xmacro-settings:print-expr-results"
   ) ++ (CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, x)) if x >= 12 => Seq(
       "-opt:l:method"

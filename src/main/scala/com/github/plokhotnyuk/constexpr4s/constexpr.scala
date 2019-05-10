@@ -31,8 +31,8 @@ object constexpr {
         else if (resultTpe =:= typeOf[Array[Long]]) q"${evalAs[Array[Long]]}"
         else if (resultTpe =:= typeOf[Array[Double]]) q"${evalAs[Array[Double]]}"
         else c.abort(c.enclosingPosition, s"Unsupported type of expression: '$resultTpe'")
-      if (c.settings.contains("print-constants")) {
-        c.info(c.enclosingPosition, s"Generated constant:\n${showCode(result)}", force = true)
+      if (c.settings.contains("print-expr-results")) {
+        c.info(c.enclosingPosition, s"Expression result:\n${showCode(result)}", force = true)
       }
       c.Expr[A](result)
     }
