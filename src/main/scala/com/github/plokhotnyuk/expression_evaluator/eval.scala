@@ -19,14 +19,9 @@ object eval {
         case x: Float => q"$x"
         case x: Long => q"$x"
         case x: Double => q"$x"
-        case x: Array[Byte] => q"$x"
-        case x: Array[Boolean] => q"$x"
-        case x: Array[Short] => q"$x"
-        case x: Array[Char] => q"$x"
-        case x: Array[Int] => q"$x"
-        case x: Array[Float] => q"$x"
-        case x: Array[Long] => q"$x"
-        case x: Array[Double] => q"$x"
+        case x: java.time.ZoneOffset => q"java.time.ZoneOffset.ofTotalSeconds(${x.getTotalSeconds})"
+        case x: java.time.ZoneId => q"java.time.ZoneId.of(${x.getId})"
+        case x: Array[A] => q"$x"
         case _ => c.abort(c.enclosingPosition, s"Unsupported type of expression: '${weakTypeOf[A].dealias}'")
       })
 

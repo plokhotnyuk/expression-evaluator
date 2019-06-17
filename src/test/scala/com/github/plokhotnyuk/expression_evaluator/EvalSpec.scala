@@ -1,5 +1,7 @@
 package com.github.plokhotnyuk.expression_evaluator
 
+import java.time.{ZoneId, ZoneOffset}
+
 import org.scalatest.exceptions.TestFailedException
 import org.scalatest.{Matchers, WordSpec}
 
@@ -14,6 +16,8 @@ class EvalSpec extends WordSpec with Matchers {
       eval((1 * 3 * 5).toFloat) shouldBe 15.toFloat
       eval((1 * 3 * 5).toDouble) shouldBe 15.toDouble
       eval((1 * 3 * 5).toLong) shouldBe 15.toLong
+      eval(ZoneOffset.ofHoursMinutes(2, 0)) shouldBe ZoneOffset.ofHoursMinutes(2, 0)
+      eval(ZoneId.of("UTC")) shouldBe ZoneId.of("UTC")
     }
     "evaluate constants of array of primitives from expression in compile-time" in {
       eval((1 to 5 by 2).map(_.toByte).toArray) shouldBe List[Byte](1.toByte, 3.toByte, 5.toByte)
@@ -24,6 +28,8 @@ class EvalSpec extends WordSpec with Matchers {
       eval((1 to 5 by 2).map(1.0f / _).toArray) shouldBe List[Float](1.0f, 1.0f / 3, 1.0f / 5)
       eval((1 to 5 by 2).map(_.toLong).toArray) shouldBe List[Long](1, 3, 5)
       eval((1 to 5 by 2).map(1.0 / _).toArray) shouldBe List[Double](1.0, 1.0 / 3, 1.0 / 5)
+      eval((1 to 5 by 2).map(ZoneOffset.ofHours).toArray) shouldBe List[ZoneId](ZoneOffset.ofHours(1), ZoneOffset.ofHours(3), ZoneOffset.ofHours(5))
+      eval((1 to 5 by 2).map(x => ZoneId.ofOffset("UTC", ZoneOffset.ofHours(x))).toArray) shouldBe List[ZoneId](ZoneId.of("UTC+1"), ZoneId.of("UTC+3"), ZoneId.of("UTC+5"))
     }
     "throw compilation error if expression cannot be evaluated" in {
       assert(intercept[TestFailedException](assertCompiles {
