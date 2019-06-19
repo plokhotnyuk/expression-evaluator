@@ -23,7 +23,7 @@ releaseProcess := Seq[ReleaseStep](
   releaseStepCommandAndRemaining("+test"),
   setReleaseVersion,
 //  releaseStepCommandAndRemaining("+mimaReportBinaryIssues"),
-  updateVersionInReadme,
+//  updateVersionInReadme,
   commitReleaseVersion,
   tagRelease,
   releaseStepCommandAndRemaining("+publishSigned"),
