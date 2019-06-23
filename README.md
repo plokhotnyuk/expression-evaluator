@@ -7,6 +7,8 @@
 
 Compile-time expression evaluation for Scala
 
+## How to use
+
 Add the library with a "provided" scope to your dependencies list:
 
 ```sbt
@@ -30,4 +32,42 @@ To see generated code for expression results
 
 ```sbt
 scalacOptions ++= Seq("-Xmacro-settings:print-expr-results")
+```
+
+## How to contribute
+
+### Build and test
+
+To compile, run tests, check coverage, and check binary compatibility for different Scala versions use a command:
+
+```sh
+sbt clean +coverage +test +coverageReport +mimaReportBinaryIssues
+```
+
+BEWARE: expression-evaluator is included into [Scala Community Build](https://github.com/scala/community-builds)
+ for 2.11.x, 2.12.x, and 2.13.x versions of Scala.
+
+### Publish locally
+
+Publish to the local Ivy repo:
+
+```sh
+sbt +publishLocal
+```
+
+Publish to the local Maven repo:
+
+```sh
+sbt +publishM2
+```
+
+### Release
+
+For version numbering use [Recommended Versioning Scheme](http://docs.scala-lang.org/overviews/core/binary-compatibility-for-library-authors.html#recommended-versioning-scheme)
+that is used in the Scala ecosystem.
+
+Double check binary and source compatibility (including behavior) and run `release` command (credentials required):
+
+```sh
+sbt release
 ```
