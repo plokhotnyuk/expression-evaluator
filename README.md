@@ -1,5 +1,6 @@
 # Expression Evaluator
 
+[![AppVeyor build](https://ci.appveyor.com/api/projects/status/ucgumug0m3flbyu8/branch/master?svg=true)](https://ci.appveyor.com/project/plokhotnyuk/expression-evaluator/branch/master)
 [![TravisCI build](https://travis-ci.org/plokhotnyuk/expression-evaluator.svg?branch=master)](https://travis-ci.org/plokhotnyuk/expression-evaluator) 
 [![codecov](https://codecov.io/gh/plokhotnyuk/expression-evaluator/branch/master/graph/badge.svg)](https://codecov.io/gh/plokhotnyuk/expression-evaluator)
 
