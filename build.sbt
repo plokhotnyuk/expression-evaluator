@@ -1,4 +1,30 @@
+import com.typesafe.tools.mima.plugin.MimaPlugin.mimaDefaultSettings
 import sbt._
+import scala.sys.process._
+
+lazy val oldVersion = "git describe --abbrev=0".!!.trim.replaceAll("^v", "")
+
+def mimaSettings: Seq[Setting[_]] = mimaDefaultSettings ++ Seq(
+  mimaCheckDirection := {
+    def isPatch: Boolean = {
+      val Array(newMajor, newMinor, _) = version.value.split('.')
+      val Array(oldMajor, oldMinor, _) = oldVersion.split('.')
+      newMajor == oldMajor && newMinor == oldMinor
+    }
+
+    if (isPatch) "both" else "backward"
+  },
+  mimaPreviousArtifacts := {
+    def isCheckingRequired: Boolean = {
+      val Array(newMajor, newMinor, _) = version.value.split('.')
+      val Array(oldMajor, oldMinor, _) = oldVersion.split('.')
+      newMajor == oldMajor && (newMajor != "0" || newMinor == oldMinor)
+    }
+
+    if (isCheckingRequired) Set(organization.value %% moduleName.value % oldVersion)
+    else Set()
+  }
+)
 
 lazy val commonSettings = Seq(
   organization := "com.github.plokhotnyuk.expression-evaluator",
@@ -54,7 +80,7 @@ lazy val publishSettings = Seq(
 
 lazy val `expression-evaluator` = project.in(file("."))
   .settings(commonSettings)
-  .settings(publishSettings)
+  .settings(mimaSettings)
   .settings(publishSettings)
   .settings(
     crossScalaVersions := Seq("2.13.0", "2.12.8", "2.11.12"),
