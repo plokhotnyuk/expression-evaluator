@@ -1,4 +1,8 @@
 # Expression Evaluator
+
+[![TravisCI build](https://travis-ci.org/plokhotnyuk/expression-evaluator.svg?branch=master)](https://travis-ci.org/plokhotnyuk/expression-evaluator) 
+[![codecov](https://codecov.io/gh/plokhotnyuk/expression-evaluator/branch/master/graph/badge.svg)](https://codecov.io/gh/plokhotnyuk/expression-evaluator)
+
 Compile-time expression evaluation for Scala
 
 Publish it locally:
