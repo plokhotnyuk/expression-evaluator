@@ -17,7 +17,7 @@ libraryDependencies ++= Seq(
 )
 ```
 
-Generate expression results for primitives and array of primitives:
+Generate expression results for primitives, strings, `java.time.ZoneId`, `java.time.ZoneOffset`, and arrays of them:
     
 ```scala
 import com.github.plokhotnyuk.expression_evaluator._

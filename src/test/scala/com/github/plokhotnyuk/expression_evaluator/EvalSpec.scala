@@ -7,7 +7,8 @@ import org.scalatest.{Matchers, WordSpec}
 
 class EvalSpec extends WordSpec with Matchers {
   "eval.apply" should {
-    "evaluate primitive constants from expression in compile-time" in {
+    "evaluate constants from expression in compile-time" in {
+      eval("1" * 3 * 5) shouldBe "111111111111111"
       eval((1 * 3 * 5).toByte) shouldBe 15.toByte
       eval(true && false) shouldBe false
       eval((1 * 3 * 5).toShort) shouldBe 15.toShort
@@ -19,7 +20,8 @@ class EvalSpec extends WordSpec with Matchers {
       eval(ZoneOffset.ofHoursMinutes(2, 0)) shouldBe ZoneOffset.ofHoursMinutes(2, 0)
       eval(ZoneId.of("UTC")) shouldBe ZoneId.of("UTC")
     }
-    "evaluate constants of array of primitives from expression in compile-time" in {
+    "evaluate arrays of constants from expression in compile-time" in {
+      eval((1 to 5 by 2).map(_.toString).toArray) shouldBe List[String]("1", "3", "5")
       eval((1 to 5 by 2).map(_.toByte).toArray) shouldBe List[Byte](1.toByte, 3.toByte, 5.toByte)
       eval((1 to 5 by 2).map(_ % 3 == 0).toArray) shouldBe List[Boolean](false, true, false)
       eval((1 to 5 by 2).map(_.toShort).toArray) shouldBe List[Short](1.toShort, 3.toShort, 5.toShort)

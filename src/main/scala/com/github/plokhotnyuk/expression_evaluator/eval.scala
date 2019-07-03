@@ -11,6 +11,7 @@ object eval {
       import c.universe._
 
       implicit def lift: c.universe.Liftable[A] = Liftable[A]({
+        case x: String => q"$x"
         case x: Byte => q"$x"
         case x: Boolean => q"$x"
         case x: Short => q"$x"
