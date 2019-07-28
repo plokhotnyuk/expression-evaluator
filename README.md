@@ -17,7 +17,8 @@ libraryDependencies ++= Seq(
 )
 ```
 
-Generate expression results for primitives, strings, `java.time.ZoneId`, `java.time.ZoneOffset`, and arrays of them:
+Generate expression results for primitives, strings, `BigInt`, `java.time.ZoneId`, `java.time.ZoneOffset`, and arrays of
+them:
     
 ```scala
 import com.github.plokhotnyuk.expression_evaluator._
@@ -45,7 +46,7 @@ sbt clean +coverage +test +coverageReport +mimaReportBinaryIssues
 ```
 
 BEWARE: expression-evaluator is included into [Scala Community Build](https://github.com/scala/community-builds)
- for 2.11.x, 2.12.x, and 2.13.x versions of Scala.
+for 2.11.x, 2.12.x, and 2.13.x versions of Scala.
 
 ### Publish locally
 
