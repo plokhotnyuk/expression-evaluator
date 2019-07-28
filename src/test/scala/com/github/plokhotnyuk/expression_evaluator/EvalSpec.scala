@@ -1,7 +1,5 @@
 package com.github.plokhotnyuk.expression_evaluator
 
-import java.time.{ZoneId, ZoneOffset}
-
 import org.scalatest.exceptions.TestFailedException
 import org.scalatest.{Matchers, WordSpec}
 
@@ -17,21 +15,26 @@ class EvalSpec extends WordSpec with Matchers {
       eval((1 * 3 * 5).toFloat) shouldBe 15.toFloat
       eval((1 * 3 * 5).toDouble) shouldBe 15.toDouble
       eval((1 * 3 * 5).toLong) shouldBe 15.toLong
-      eval(ZoneOffset.ofHoursMinutes(2, 0)) shouldBe ZoneOffset.ofHoursMinutes(2, 0)
-      eval(ZoneId.of("UTC")) shouldBe ZoneId.of("UTC")
+      eval(BigInt(1 * 3 * 5).pow(135)) shouldBe
+        BigInt("591997636055909903024118779314257539989607918089249337791802804690788180909141011467749459930642481238241857626541041724477221208644550642929971218109130859375")
+      eval(java.time.ZoneOffset.ofHoursMinutes(2, 0)) shouldBe java.time.ZoneOffset.ofHoursMinutes(2, 0)
+      eval(java.time.ZoneId.of("UTC")) shouldBe java.time.ZoneId.of("UTC")
     }
     "evaluate arrays of constants from expression in compile-time" in {
-      eval((1 to 5 by 2).map(_.toString).toArray) shouldBe List[String]("1", "3", "5")
-      eval((1 to 5 by 2).map(_.toByte).toArray) shouldBe List[Byte](1.toByte, 3.toByte, 5.toByte)
-      eval((1 to 5 by 2).map(_ % 3 == 0).toArray) shouldBe List[Boolean](false, true, false)
-      eval((1 to 5 by 2).map(_.toShort).toArray) shouldBe List[Short](1.toShort, 3.toShort, 5.toShort)
-      eval((1 to 5 by 2).map(_.toChar).toArray) shouldBe List[Char]('\u0001', '\u0003', '\u0005')
+      eval((1 to 5 by 2).map(_.toString).toArray) shouldBe List("1", "3", "5")
+      eval((1 to 5 by 2).map(_.toByte).toArray) shouldBe List(1.toByte, 3.toByte, 5.toByte)
+      eval((1 to 5 by 2).map(_ % 3 == 0).toArray) shouldBe List(false, true, false)
+      eval((1 to 5 by 2).map(_.toShort).toArray) shouldBe List(1.toShort, 3.toShort, 5.toShort)
+      eval((1 to 5 by 2).map(_.toChar).toArray) shouldBe List('\u0001', '\u0003', '\u0005')
       eval((1 to 5 by 2).toArray) shouldBe List(1, 3, 5)
-      eval((1 to 5 by 2).map(1.0f / _).toArray) shouldBe List[Float](1.0f, 1.0f / 3, 1.0f / 5)
-      eval((1 to 5 by 2).map(_.toLong).toArray) shouldBe List[Long](1, 3, 5)
-      eval((1 to 5 by 2).map(1.0 / _).toArray) shouldBe List[Double](1.0, 1.0 / 3, 1.0 / 5)
-      eval((1 to 5 by 2).map(ZoneOffset.ofHours).toArray) shouldBe List[ZoneId](ZoneOffset.ofHours(1), ZoneOffset.ofHours(3), ZoneOffset.ofHours(5))
-      eval((1 to 5 by 2).map(x => ZoneId.ofOffset("UTC", ZoneOffset.ofHours(x))).toArray) shouldBe List[ZoneId](ZoneId.of("UTC+1"), ZoneId.of("UTC+3"), ZoneId.of("UTC+5"))
+      eval((1 to 5 by 2).map(1.0f / _).toArray) shouldBe List(1.0f, 1.0f / 3, 1.0f / 5)
+      eval((1 to 5 by 2).map(_.toLong).toArray) shouldBe List(1, 3, 5)
+      eval((1 to 5 by 2).map(1.0 / _).toArray) shouldBe List(1.0, 1.0 / 3, 1.0 / 5)
+      eval((1 to 5 by 2).map(BigInt(_)).toArray) shouldBe List(BigInt(1), BigInt(3), BigInt(5))
+      eval((1 to 5 by 2).map(java.time.ZoneOffset.ofHours).toArray) shouldBe
+        List(java.time.ZoneOffset.ofHours(1), java.time.ZoneOffset.ofHours(3), java.time.ZoneOffset.ofHours(5))
+      eval((1 to 5 by 2).map(x => java.time.ZoneId.ofOffset("UTC", java.time.ZoneOffset.ofHours(x))).toArray) shouldBe
+        List(java.time.ZoneId.of("UTC+1"), java.time.ZoneId.of("UTC+3"), java.time.ZoneId.of("UTC+5"))
     }
     "throw compilation error if expression cannot be evaluated" in {
       assert(intercept[TestFailedException](assertCompiles {

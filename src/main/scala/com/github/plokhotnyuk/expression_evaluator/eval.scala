@@ -20,6 +20,7 @@ object eval {
         case x: Float => q"$x"
         case x: Long => q"$x"
         case x: Double => q"$x"
+        case x: BigInt => q"BigInt(${x.underlying().toByteArray})"
         case x: java.time.ZoneOffset => q"java.time.ZoneOffset.ofTotalSeconds(${x.getTotalSeconds})"
         case x: java.time.ZoneId => q"java.time.ZoneId.of(${x.getId})"
         case x: Array[A] => q"$x"
