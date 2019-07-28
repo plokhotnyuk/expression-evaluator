@@ -21,20 +21,20 @@ class EvalSpec extends WordSpec with Matchers {
       eval(java.time.ZoneId.of("UTC")) shouldBe java.time.ZoneId.of("UTC")
     }
     "evaluate arrays of constants from expression in compile-time" in {
-      eval((1 to 5 by 2).map(_.toString).toArray) shouldBe List("1", "3", "5")
-      eval((1 to 5 by 2).map(_.toByte).toArray) shouldBe List(1.toByte, 3.toByte, 5.toByte)
-      eval((1 to 5 by 2).map(_ % 3 == 0).toArray) shouldBe List(false, true, false)
-      eval((1 to 5 by 2).map(_.toShort).toArray) shouldBe List(1.toShort, 3.toShort, 5.toShort)
-      eval((1 to 5 by 2).map(_.toChar).toArray) shouldBe List('\u0001', '\u0003', '\u0005')
-      eval((1 to 5 by 2).toArray) shouldBe List(1, 3, 5)
-      eval((1 to 5 by 2).map(1.0f / _).toArray) shouldBe List(1.0f, 1.0f / 3, 1.0f / 5)
-      eval((1 to 5 by 2).map(_.toLong).toArray) shouldBe List(1, 3, 5)
-      eval((1 to 5 by 2).map(1.0 / _).toArray) shouldBe List(1.0, 1.0 / 3, 1.0 / 5)
-      eval((1 to 5 by 2).map(BigInt(_)).toArray) shouldBe List(BigInt(1), BigInt(3), BigInt(5))
+      eval((1 to 5 by 2).map(_.toString).toArray) shouldBe Array("1", "3", "5")
+      eval((1 to 5 by 2).map(_.toByte).toArray) shouldBe Array(1.toByte, 3.toByte, 5.toByte)
+      eval((1 to 5 by 2).map(_ % 3 == 0).toArray) shouldBe Array(false, true, false)
+      eval((1 to 5 by 2).map(_.toShort).toArray) shouldBe Array(1.toShort, 3.toShort, 5.toShort)
+      eval((1 to 5 by 2).map(_.toChar).toArray) shouldBe Array('\u0001', '\u0003', '\u0005')
+      eval((1 to 5 by 2).toArray) shouldBe Array(1, 3, 5)
+      eval((1 to 5 by 2).map(1.0f / _).toArray) shouldBe Array(1.0f, 1.0f / 3, 1.0f / 5)
+      eval((1 to 5 by 2).map(_.toLong).toArray) shouldBe Array(1, 3, 5)
+      eval((1 to 5 by 2).map(1.0 / _).toArray) shouldBe Array(1.0, 1.0 / 3, 1.0 / 5)
+      eval((1 to 5 by 2).map(BigInt(_)).toArray) shouldBe Array(BigInt(1), BigInt(3), BigInt(5))
       eval((1 to 5 by 2).map(java.time.ZoneOffset.ofHours).toArray) shouldBe
-        List(java.time.ZoneOffset.ofHours(1), java.time.ZoneOffset.ofHours(3), java.time.ZoneOffset.ofHours(5))
+        Array(java.time.ZoneOffset.ofHours(1), java.time.ZoneOffset.ofHours(3), java.time.ZoneOffset.ofHours(5))
       eval((1 to 5 by 2).map(x => java.time.ZoneId.ofOffset("UTC", java.time.ZoneOffset.ofHours(x))).toArray) shouldBe
-        List(java.time.ZoneId.of("UTC+1"), java.time.ZoneId.of("UTC+3"), java.time.ZoneId.of("UTC+5"))
+        Array(java.time.ZoneId.of("UTC+1"), java.time.ZoneId.of("UTC+3"), java.time.ZoneId.of("UTC+5"))
     }
     "throw compilation error if expression cannot be evaluated" in {
       assert(intercept[TestFailedException](assertCompiles {
