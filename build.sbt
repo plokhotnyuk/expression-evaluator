@@ -17,8 +17,8 @@ lazy val commonSettings = Seq(
       url = url("https://twitter.com/aplokhotnyuk")
     )
   ),
-  resolvers += "Sonatype OSS Staging" at "https://oss.sonatype.org/content/repositories/staging",
-  scalaVersion := "2.13.0",
+  resolvers += Resolver.sonatypeRepo("staging"),
+  scalaVersion := "2.13.1",
   javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),
   scalacOptions ++= Seq(
     "-deprecation",
@@ -39,11 +39,8 @@ lazy val commonSettings = Seq(
     )
     case _ => Seq()
   }),
-  testOptions in Test += Tests.Argument("-oDF")
-)
-
-lazy val publishSettings = Seq(
-  publishTo := Some(if (isSnapshot.value) Opts.resolver.sonatypeSnapshots else Opts.resolver.sonatypeStaging),
+  testOptions in Test += Tests.Argument("-oDF"),
+  publishTo := sonatypePublishToBundle.value,
   sonatypeProfileName := "com.github.plokhotnyuk",
   scmInfo := Some(
     ScmInfo(
@@ -53,6 +50,9 @@ lazy val publishSettings = Seq(
   ),
   publishMavenStyle := true,
   pomIncludeRepository := { _ => false },
+)
+
+lazy val publishSettings = Seq(
   mimaCheckDirection := {
     def isPatch: Boolean = {
       val Array(newMajor, newMinor, _) = version.value.split('.')
@@ -78,7 +78,7 @@ lazy val `expression-evaluator` = project.in(file("."))
   .settings(commonSettings)
   .settings(publishSettings)
   .settings(
-    crossScalaVersions := Seq("2.13.0", "2.12.10", "2.11.12"),
+    crossScalaVersions := Seq("2.13.1", "2.12.10", "2.11.12"),
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value,
       "org.scalatest" %% "scalatest" % "3.0.8" % Test
