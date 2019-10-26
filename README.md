@@ -1,6 +1,6 @@
 # Expression Evaluator
 
-[![AppVeyor build](https://ci.appveyor.com/api/projects/status/ucgumug0m3flbyu8/branch/master?svg=true)](https://ci.appveyor.com/project/plokhotnyuk/expression-evaluator/branch/master)
+[![Actions build](https://github.com/plokhotnyuk/expression-evaluator/workflows/build/badge.svg)](https://github.com/plokhotnyuk/expression-evaluator/actions)
 [![TravisCI build](https://travis-ci.org/plokhotnyuk/expression-evaluator.svg?branch=master)](https://travis-ci.org/plokhotnyuk/expression-evaluator) 
 [![codecov](https://codecov.io/gh/plokhotnyuk/expression-evaluator/branch/master/graph/badge.svg)](https://codecov.io/gh/plokhotnyuk/expression-evaluator)
 [![Maven Central](https://img.shields.io/badge/maven--central-0.1.1-blue.svg)](https://search.maven.org/search?q=com.github.plokhotnyuk.expression-evaluator)
