@@ -9,11 +9,11 @@ Compile-time expression evaluation for Scala
 
 ## How to use
 
-Add the library with a "provided" scope to your dependencies list:
+Add the library to your dependencies list:
 
 ```sbt
 libraryDependencies ++= Seq(
-  "com.github.plokhotnyuk.expression-evaluator" %% "expression-evaluator" % "0.1.1" % Provided // required only in compile-time
+  "com.github.plokhotnyuk.expression-evaluator" %% "expression-evaluator" % "0.1.1"
 )
 ```
 
