@@ -1,9 +1,10 @@
 package com.github.plokhotnyuk.expression_evaluator
 
 import org.scalatest.exceptions.TestFailedException
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class EvalSpec extends WordSpec with Matchers {
+class EvalSpec extends AnyWordSpec with Matchers {
   "eval.apply" should {
     "evaluate constants from expression in compile-time" in {
       eval("1" * 3 * 5) shouldBe "111111111111111"
