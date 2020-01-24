@@ -19,8 +19,8 @@ jobs:
       matrix:
         java:
           - graalvm@
+          - zulu@
           - zulu@1.8
-          - zulu@1.11
         os:
           - ubuntu-latest
           - macOS-latest

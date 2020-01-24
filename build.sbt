@@ -30,9 +30,6 @@ lazy val commonSettings = Seq(
     "-Xlint",
     "-Xmacro-settings:print-expr-results"
   ) ++ (CrossVersion.partialVersion(scalaVersion.value) match {
-    case Some((2, x)) if x >= 12 => Seq(
-      "-opt:l:method"
-    )
     case Some((2, x)) if x == 11 => Seq(
       "-Ybackend:GenBCode",
       "-Ydelambdafy:inline"
