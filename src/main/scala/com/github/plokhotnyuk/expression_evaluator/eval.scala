@@ -1,5 +1,7 @@
 package com.github.plokhotnyuk.expression_evaluator
 
+import java.math.BigInteger
+
 import scala.language.experimental.macros
 import scala.reflect.macros.blackbox
 
@@ -20,9 +22,10 @@ object eval {
         case x: Float => q"$x"
         case x: Long => q"$x"
         case x: Double => q"$x"
-        case x: BigInt => q"BigInt(${x.underlying().toByteArray})"
-        case x: java.time.ZoneOffset => q"java.time.ZoneOffset.ofTotalSeconds(${x.getTotalSeconds})"
-        case x: java.time.ZoneId => q"java.time.ZoneId.of(${x.getId})"
+        case x: BigInt => q"_root_.scala.math.BigInt(${x.underlying().toByteArray})"
+        case x: BigInteger => q"new _root_.java.math.BigInteger(${x.toByteArray})"
+        case x: java.time.ZoneOffset => q"_root_.java.time.ZoneOffset.ofTotalSeconds(${x.getTotalSeconds})"
+        case x: java.time.ZoneId => q"_root_.java.time.ZoneId.of(${x.getId})"
         case x: Array[A] => q"$x"
         case _ => c.abort(c.enclosingPosition, s"Unsupported type of expression: '${weakTypeOf[A].dealias}'")
       })
