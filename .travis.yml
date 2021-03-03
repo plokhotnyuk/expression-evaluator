@@ -22,7 +22,7 @@ matrix:
       dist: focal
       arch: amd64
       jdk: openjdk11
-      scala: 2.12.12
+      scala: 2.12.13
     - os: linux
       dist: focal
       arch: amd64
