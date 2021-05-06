@@ -18,7 +18,7 @@ lazy val commonSettings = Seq(
     )
   ),
   resolvers += Resolver.sonatypeRepo("staging"),
-  scalaVersion := "2.13.3",
+  scalaVersion := "2.13.5",
   javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),
   scalacOptions ++= Seq(
     "-deprecation",
@@ -50,6 +50,7 @@ lazy val commonSettings = Seq(
 )
 
 lazy val publishSettings = Seq(
+  packageOptions += Package.ManifestAttributes("Automatic-Module-Name" -> moduleName.value),
   mimaCheckDirection := {
     def isPatch: Boolean = {
       val Array(newMajor, newMinor, _) = version.value.split('.')
@@ -75,7 +76,7 @@ lazy val `expression-evaluator` = project.in(file("."))
   .settings(commonSettings)
   .settings(publishSettings)
   .settings(
-    crossScalaVersions := Seq("2.13.3", "2.12.13", "2.13.5"),
+    crossScalaVersions := Seq("2.13.5", "2.12.13", "2.13.5"),
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value,
       "org.scalatest" %% "scalatest" % "3.2.8" % Test
