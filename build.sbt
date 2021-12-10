@@ -36,7 +36,7 @@ lazy val commonSettings = Seq(
     )
     case _ => Seq()
   }),
-  testOptions in Test += Tests.Argument("-oDF"),
+  (Test / testOptions) += Tests.Argument("-oDF"),
   publishTo := sonatypePublishToBundle.value,
   sonatypeProfileName := "com.github.plokhotnyuk",
   scmInfo := Some(
