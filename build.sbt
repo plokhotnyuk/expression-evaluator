@@ -79,6 +79,6 @@ lazy val `expression-evaluator` = project.in(file("."))
     crossScalaVersions := Seq("2.13.7", "2.12.15", "2.13.5"),
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-      "org.scalatest" %% "scalatest" % "3.2.10" % Test
+      "org.scalatest" %% "scalatest" % "3.2.14" % Test
     )
   )
