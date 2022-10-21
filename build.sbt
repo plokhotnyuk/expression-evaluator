@@ -17,8 +17,7 @@ lazy val commonSettings = Seq(
       url = url("https://twitter.com/aplokhotnyuk")
     )
   ),
-  resolvers += Resolver.sonatypeRepo("staging"),
-  scalaVersion := "2.13.5",
+  scalaVersion := "2.13.10",
   javacOptions ++= Seq("-source", "1.8", "-target", "1.8"),
   scalacOptions ++= Seq(
     "-deprecation",
@@ -76,9 +75,9 @@ lazy val `expression-evaluator` = project.in(file("."))
   .settings(commonSettings)
   .settings(publishSettings)
   .settings(
-    crossScalaVersions := Seq("2.13.7", "2.12.15", "2.13.5"),
+    crossScalaVersions := Seq("2.13.10", "2.12.17", "2.11.12"),
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-      "org.scalatest" %% "scalatest" % "3.2.10" % Test
+      "org.scalatest" %% "scalatest" % "3.2.14" % Test
     )
   )
