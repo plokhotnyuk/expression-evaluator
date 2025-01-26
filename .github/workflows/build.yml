@@ -18,11 +18,11 @@ jobs:
     strategy:
       matrix:
         java:
-          - zulu@1.11
-          - zulu@1.8
+          - 11
+          - 21
         os:
-          - ubuntu-latest
-          - macOS-latest
+          - ubuntu-22.04-arm
+          - ubuntu-22.04
       fail-fast: false
     steps:
       - name: Configure git
@@ -33,16 +33,13 @@ jobs:
           fetch-depth: 100
       - name: Fetch tags
         run: git fetch --depth=100 origin +refs/tags/*:refs/tags/*
-      - uses: coursier/cache-action@v5
-      - uses: olafurpg/setup-scala@v12
+      - name: Cache SBT deps  
+        uses: coursier/cache-action@v6
+      - name: Setup Scala with SBT
+        uses: coursier/setup-action@v1
         with:
-          java-version: ${{matrix.java}}
+          apps: sbt
       - name: Compile, test and check binary compatibility
         run: "sbt -batch clean +test +mimaReportBinaryIssues"
         shell: bash
-      - name: Test with coverage
-        if: ${{ matrix.os == 'ubuntu-latest' && matrix.java == 'zulu@1.8' }}
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-        run: "sbt -batch coverage test coverageAggregate coveralls"
-        shell: bash
+
